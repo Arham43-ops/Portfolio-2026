@@ -1,53 +1,42 @@
+# ARHAM TOPIWALA — FULL STACK WEB DEVELOPER
+
+> A dark, editorial portfolio engineered around one idea:  
+> **make the interface feel like a digital product, not a résumé.**
+
+![Portfolio Preview](assets/preview.png)
+
+---
+
+## 01 — THE IDEA
+
+This portfolio is a custom-built personal website for **Arham Topiwala**, a Full Stack Web Developer focused on scalable applications, RESTful API integrations, responsive UI engineering, performance optimization, and data-driven systems.
+
+The experience intentionally avoids the traditional "developer portfolio" formula.
+
+Instead of presenting a long list of technologies and generic project cards, the website uses:
+
+- A cinematic black / crimson visual system
+- Oversized editorial typography
+- Layered typography and portrait composition
+- Fixed navigation
+- Motion-driven micro-interactions
+- Custom loading experience
+- Animated capability marquee
+- Structured experience timelines
+- Interactive technology panels
+- Resume-backed achievements
+- Responsive layouts across modern screen sizes
+
+The goal is simple:
+
+> **Turn professional information into a visual experience.**
+
+## ✦ DEVELOPER QUOTE
+
 <div align="center">
 
-# ARHAM TOPIWALA
-
-### FULL STACK WEB DEVELOPER
-
-**Scalable Applications · RESTful APIs · Responsive UI · Performance Optimization · AI / LLM Integration**
-
-<br>
-
-<a href="#-about-the-project">ABOUT</a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="#-featured-work">WORK</a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="#-technology-stack">STACK</a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="#-experience">EXPERIENCE</a>
-&nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="#-contact">CONTACT</a>
-
-</div>
-
-<br>
-
-<div align="center">
-
-<img src="./assets/preview.png" alt="Arham Topiwala Portfolio Preview" width="100%">
-
-</div>
-
-<br>
-
-<div align="center">
-
-> **A developer portfolio engineered as a digital experience — not just a résumé on a webpage.**
+<img src="./assets/quote-showcase.gif" alt="Animated multilingual developer quote showcase" width="900">
 
 </div>
 
 ---
-
-## ✦ ABOUT THE PROJECT
-
-This repository contains the personal portfolio website of **Arham Topiwala**, a Full Stack Web Developer focused on building responsive interfaces, scalable web applications, RESTful API integrations, data-driven systems, performance-focused experiences, and AI/LLM integrations.
-
-The portfolio is deliberately designed around a **dark editorial interface** rather than a conventional developer portfolio.
-
-Instead of simply presenting:
-
-```text
-ABOUT
-SKILLS
-PROJECTS
-CONTACT
