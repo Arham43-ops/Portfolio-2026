@@ -31,12 +31,9 @@ The goal is simple:
 
 > **Turn professional information into a visual experience.**
 
-## ✦ DEVELOPER QUOTE
-
-<div align="center">
-
-<img src="./assets/quote-showcase.gif" alt="Animated multilingual developer quote showcase" width="900">
-
-</div>
+✦ Developer Quote
+<p align="center">
+  <img src="./assets/developer-quote-showcase.gif" alt="Animated multilingual developer quote" width="900">
+</p>
 
 ---
