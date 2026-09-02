@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stacklore.tech/sitemap.xml
+# Add your deployed sitemap URL here after connecting the production domain.

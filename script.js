@@ -17,10 +17,17 @@
       dot.style.left = `${event.clientX}px`;
       dot.style.top = `${event.clientY}px`;
     }, { passive: true });
-    window.addEventListener('pointerleave', () => { dot.style.opacity = '0'; }, { passive: true });
-    window.addEventListener('pointerenter', () => { dot.style.opacity = '1'; }, { passive: true });
+
+    window.addEventListener('pointerleave', () => {
+      dot.style.opacity = '0';
+    }, { passive: true });
+
+    window.addEventListener('pointerenter', () => {
+      dot.style.opacity = '1';
+    }, { passive: true });
   }
 
+  // Smooth in-page navigation, but let the browser handle modified clicks.
   $$('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -28,15 +35,20 @@
       const target = id && document.querySelector(id);
       if (!target) return;
       event.preventDefault();
-      target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
     });
   });
 
+  // Reveal-on-scroll. Keep the observer small and one-shot.
   if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     const revealItems = $$('.about-grid, .service-grid article, .project, .project-list > div, .stack-grid, .time-row, .capability-card, .numbers div, .testimonial-grid blockquote, .contact-copy, .contact-list');
     const revealStyle = document.createElement('style');
     revealStyle.textContent = '.js-reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.js-reveal.visible{opacity:1;transform:none}';
     document.head.appendChild(revealStyle);
+
     const observer = new IntersectionObserver((entries, obs) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
@@ -44,6 +56,7 @@
         obs.unobserve(entry.target);
       }
     }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+
     revealItems.forEach((element, index) => {
       element.classList.add('js-reveal');
       element.style.transitionDelay = `${Math.min(index * 0.035, 0.35)}s`;
@@ -51,41 +64,70 @@
     });
   }
 
+  // One scroll observer for the header + active nav.
   const header = $('.topbar-refined');
   const navLinks = $$('.topbar-refined .nav a[href^="#"]');
-  const sections = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-  let ticking = false;
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
+  let ticking = false;
   const syncNavigation = () => {
     ticking = false;
     const probe = window.scrollY + Math.min(window.innerHeight * 0.30, 240);
     let current = sections[0];
-    for (const section of sections) if (section.offsetTop <= probe) current = section;
+
+    for (const section of sections) {
+      if (section.offsetTop <= probe) current = section;
+    }
+
     if (header) header.classList.toggle('nav-scrolled', window.scrollY > 32);
-    navLinks.forEach((link) => link.classList.toggle('nav-active', current && link.getAttribute('href') === `#${current.id}`));
+
+    navLinks.forEach((link) => {
+      link.classList.toggle(
+        'nav-active',
+        current && link.getAttribute('href') === `#${current.id}`
+      );
+    });
   };
 
-  window.addEventListener('scroll', () => {
+  const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(syncNavigation);
-  }, { passive: true });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', syncNavigation);
   syncNavigation();
 
+  // Loader — no unnecessary wait beyond its intended visual intro.
   if (loader) {
     const finishLoader = () => {
       loader.classList.add('is-hidden');
       document.body.classList.remove('portfolio-loading');
       window.setTimeout(() => loader.remove(), prefersReducedMotion ? 0 : 600);
     };
+
     const started = performance.now();
     const minimumTime = prefersReducedMotion ? 0 : 2300;
-    const ready = () => window.setTimeout(finishLoader, Math.max(0, minimumTime - (performance.now() - started)));
-    if (document.readyState === 'complete') ready();
-    else window.addEventListener('load', ready, { once: true });
+
+    const ready = () => {
+      const elapsed = performance.now() - started;
+      window.setTimeout(finishLoader, Math.max(0, minimumTime - elapsed));
+    };
+
+    if (document.readyState === 'complete') {
+      ready();
+    } else {
+      window.addEventListener('load', ready, { once: true });
+    }
+
     window.setTimeout(finishLoader, prefersReducedMotion ? 1200 : 5000);
   }
 
-  document.documentElement.classList.toggle('touch-device', window.matchMedia('(pointer:coarse)').matches);
+  document.documentElement.classList.toggle(
+    'touch-device',
+    window.matchMedia('(pointer:coarse)').matches
+  );
 })();
