@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# Add your deployed sitemap URL here after connecting the production domain.
+Sitemap: https://portfolio-07.antideploy.com/sitemap.xml
